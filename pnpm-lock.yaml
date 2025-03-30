@@ -20,6 +20,12 @@ importers:
 
   apps/http-backend:
     dependencies:
+      '@repo/common':
+        specifier: workspace:*
+        version: link:../../packages/common
+      '@repo/database':
+        specifier: workspace:*
+        version: link:../../packages/database
       '@types/bcryptjs':
         specifier: ^3.0.0
         version: 3.0.0
@@ -32,6 +38,9 @@ importers:
       '@types/express':
         specifier: ^5.0.1
         version: 5.0.1
+      '@types/express-serve-static-core':
+        specifier: ^5.0.6
+        version: 5.0.6
       '@types/jsonwebtoken':
         specifier: ^9.0.9
         version: 9.0.9
@@ -47,16 +56,13 @@ importers:
       express:
         specifier: ^4.21.2
         version: 4.21.2
+      express-serve-static-core:
+        specifier: ^0.1.1
+        version: 0.1.1
       jsonwebtoken:
         specifier: ^9.0.2
         version: 9.0.2
     devDependencies:
-      '@repo/common':
-        specifier: workspace:*
-        version: link:../../packages/common
-      '@repo/database':
-        specifier: workspace:*
-        version: link:../../packages/database
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
@@ -106,13 +112,34 @@ importers:
 
   apps/ws:
     dependencies:
+      '@types/jsonwebtoken':
+        specifier: ^9.0.9
+        version: 9.0.9
+      '@types/node':
+        specifier: ^22.13.14
+        version: 22.13.14
+      '@types/ws':
+        specifier: ^8.18.0
+        version: 8.18.0
       bufferutil:
         specifier: ^4.0.1
         version: 4.0.9
+      jsonwebtoken:
+        specifier: ^9.0.2
+        version: 9.0.2
+      url:
+        specifier: ^0.11.4
+        version: 0.11.4
       utf-8-validate:
         specifier: ^5.0.2
         version: 5.0.10
+      ws:
+        specifier: ^8.18.1
+        version: 8.18.1(bufferutil@4.0.9)(utf-8-validate@5.0.10)
     devDependencies:
+      '@repo/database':
+        specifier: workspace:*
+        version: link:../../packages/database
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
@@ -815,6 +842,9 @@ packages:
   '@types/serve-static@1.15.7':
     resolution: {integrity: sha512-W8Ym+h8nhuRwaKPaDw34QUkwsGi6Rc4yYqvKFo5rm2FUEhCFbzVWrxXUxuKK8TASjWsysJY0nsmNCGhCOIsrOw==}
 
+  '@types/ws@8.18.0':
+    resolution: {integrity: sha512-8svvI3hMyvN0kKCJMvTJP/x6Y/EoQbepff882wL+Sn5QsXb3etnamgrJq4isrBxSJj5L2AuXcI0+bgkoAXGUJw==}
+
   '@typescript-eslint/eslint-plugin@8.24.0':
     resolution: {integrity: sha512-aFcXEJJCI4gUdXgoo/j9udUYIHgF23MFkg09LFz2dzEmU0+1Plk4rQWv/IYKvPHAtlkkGoB3m5e6oUp+JPsNaQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
@@ -1253,6 +1283,9 @@ packages:
   etag@1.8.1:
     resolution: {integrity: sha512-aIL5Fx7mawVa300al2BnEE4iNvo1qETxLrPI/o05L7z6go7fCw1J6EQmbK4FmJ2AS7kgVF/KEZWufBfdClMcPg==}
     engines: {node: '>= 0.6'}
+
+  express-serve-static-core@0.1.1:
+    resolution: {integrity: sha512-phQFPo1vVwBLOjDq+EspUY6PpWZIs/s62Lvu6QuReViQ9j9ANBnMqPBRwdxs3zxNmpMJ9KBKrmMqCjMwHnGRyQ==}
 
   express@4.21.2:
     resolution: {integrity: sha512-28HqgMZAmih1Czt9ny7qr6ek2qddF4FclbMzwhCREB6OFfH+rXAnuNCwo1/wFvrtbgsQDb4kSbX9de9lFbrXnA==}
@@ -1879,6 +1912,9 @@ packages:
     resolution: {integrity: sha512-llQsMLSUDUPT44jdrU/O37qlnifitDP+ZwrmmZcoSKyLKvtZxpyV0n2/bD/N4tBAAZ/gJEdZU7KMraoK1+XYAg==}
     engines: {node: '>= 0.10'}
 
+  punycode@1.4.1:
+    resolution: {integrity: sha512-jmYNElW7yvO7TV33CjSmvSiE2yco3bV2czu/OzDKdMNVZQWfxCblURLhf+47syQRBntjfLdd/H0egrzIG+oaFQ==}
+
   punycode@2.3.1:
     resolution: {integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==}
     engines: {node: '>=6'}
@@ -2190,6 +2226,10 @@ packages:
   uri-js@4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
 
+  url@0.11.4:
+    resolution: {integrity: sha512-oCwdVC7mTuWiPyjLUz/COz5TLk6wgp0RCsN+wHZ2Ekneac9w8uuV0njcbbie2ME+Vs+d6duwmYuR3HgQXs1fOg==}
+    engines: {node: '>= 0.4'}
+
   utf-8-validate@5.0.10:
     resolution: {integrity: sha512-Z6czzLq4u8fPOyx7TU6X3dvUZVvoJmxSQ+IcrlmagKhilxlhZgxPK6C5Jqbkw1IDUmFTM+cz9QDnnLTwDz/2gQ==}
     engines: {node: '>=6.14.2'}
@@ -2226,6 +2266,18 @@ packages:
   word-wrap@1.2.5:
     resolution: {integrity: sha512-BN22B5eaMMI9UMtjrGd5g5eCYPpCPDUy0FJXbYsaT5zYxjFOckS53SQDE3pWkVoWpHXVb3BrYcEN4Twa55B5cA==}
     engines: {node: '>=0.10.0'}
+
+  ws@8.18.1:
+    resolution: {integrity: sha512-RKW2aJZMXeMxVpnZ6bck+RswznaxmzdULiBr6KY7XkTnW8uvt0iT9H5DkHUChXrc+uurzwa0rVI16n/Xzjdz1w==}
+    engines: {node: '>=10.0.0'}
+    peerDependencies:
+      bufferutil: ^4.0.1
+      utf-8-validate: '>=5.0.2'
+    peerDependenciesMeta:
+      bufferutil:
+        optional: true
+      utf-8-validate:
+        optional: true
 
   yocto-queue@0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
@@ -2611,11 +2663,11 @@ snapshots:
   '@types/body-parser@1.19.5':
     dependencies:
       '@types/connect': 3.4.38
-      '@types/node': 22.13.0
+      '@types/node': 22.13.14
 
   '@types/connect@3.4.38':
     dependencies:
-      '@types/node': 22.13.0
+      '@types/node': 22.13.14
 
   '@types/cookie-parser@1.4.8(@types/express@5.0.1)':
     dependencies:
@@ -2623,13 +2675,13 @@ snapshots:
 
   '@types/cors@2.8.17':
     dependencies:
-      '@types/node': 22.13.0
+      '@types/node': 22.13.14
 
   '@types/estree@1.0.6': {}
 
   '@types/express-serve-static-core@5.0.6':
     dependencies:
-      '@types/node': 22.13.0
+      '@types/node': 22.13.14
       '@types/qs': 6.9.18
       '@types/range-parser': 1.2.7
       '@types/send': 0.17.4
@@ -2647,7 +2699,7 @@ snapshots:
   '@types/jsonwebtoken@9.0.9':
     dependencies:
       '@types/ms': 2.1.0
-      '@types/node': 22.13.0
+      '@types/node': 22.13.14
 
   '@types/mime@1.3.5': {}
 
@@ -2680,13 +2732,17 @@ snapshots:
   '@types/send@0.17.4':
     dependencies:
       '@types/mime': 1.3.5
-      '@types/node': 22.13.0
+      '@types/node': 22.13.14
 
   '@types/serve-static@1.15.7':
     dependencies:
       '@types/http-errors': 2.0.4
-      '@types/node': 22.13.0
+      '@types/node': 22.13.14
       '@types/send': 0.17.4
+
+  '@types/ws@8.18.0':
+    dependencies:
+      '@types/node': 22.13.14
 
   '@typescript-eslint/eslint-plugin@8.24.0(@typescript-eslint/parser@8.24.0(eslint@9.21.0(jiti@2.4.2))(typescript@5.7.3))(eslint@9.21.0(jiti@2.4.2))(typescript@5.7.3)':
     dependencies:
@@ -3302,6 +3358,8 @@ snapshots:
   esutils@2.0.3: {}
 
   etag@1.8.1: {}
+
+  express-serve-static-core@0.1.1: {}
 
   express@4.21.2:
     dependencies:
@@ -3956,6 +4014,8 @@ snapshots:
       forwarded: 0.2.0
       ipaddr.js: 1.9.1
 
+  punycode@1.4.1: {}
+
   punycode@2.3.1: {}
 
   qs@6.13.0:
@@ -4343,6 +4403,11 @@ snapshots:
     dependencies:
       punycode: 2.3.1
 
+  url@0.11.4:
+    dependencies:
+      punycode: 1.4.1
+      qs: 6.13.0
+
   utf-8-validate@5.0.10:
     dependencies:
       node-gyp-build: 4.8.4
@@ -4396,6 +4461,11 @@ snapshots:
       isexe: 2.0.0
 
   word-wrap@1.2.5: {}
+
+  ws@8.18.1(bufferutil@4.0.9)(utf-8-validate@5.0.10):
+    optionalDependencies:
+      bufferutil: 4.0.9
+      utf-8-validate: 5.0.10
 
   yocto-queue@0.1.0: {}
 

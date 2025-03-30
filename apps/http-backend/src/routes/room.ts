@@ -1,11 +1,11 @@
-import { Router } from "express";
+import { Request, Response, Router } from "express";
 import { roomSchema } from "@repo/common/types.ts";
 import { middleware } from "../middleware";
 import { prisma } from "@repo/database";
 
 export const createRoom: Router = Router();
 
-createRoom.post("/room",middleware, async (req, res) => {
+createRoom.post("/room",middleware, async (req:Request, res: Response) => {
   const parsed = roomSchema.safeParse(req.body);
   if (!parsed.success){
     res.status(400).json({error: parsed.error.format()});
@@ -36,7 +36,7 @@ createRoom.post("/room",middleware, async (req, res) => {
   }
 });
 
-createRoom.get("/chats/:roomId", async (req, res) => {
+createRoom.get("/chats/:roomId",middleware, async (req: Request, res: Response) => {
   try{
     const roomId = Number(req.params.roomId); //typeof params is always string
     const messages = await prisma.chat.findMany({
@@ -58,7 +58,7 @@ createRoom.get("/chats/:roomId", async (req, res) => {
   }
 })
 
-createRoom.get("/room/:slug", async (req, res) => {
+createRoom.get("/room/:slug", async (req: Request, res: Response) => {
   const slug = req.params.slug;
   const room = await prisma.room.findFirst({
     where: {

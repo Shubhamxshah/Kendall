@@ -1,7 +1,8 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import { authRouter } from "./routes/auth";
+import { createRoom } from "./routes/room";
 
 const app = express();
 
@@ -11,11 +12,12 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 8080;
 
-app.get("/", (_, res) => {
-  res.send("hello shubham from server");
+app.get("/", (_:Request, res: Response) => {
+  res.json({message: "hello shubham from server"});
 })
 
 app.use("/api/auth", authRouter)
+app.use("/api", createRoom);
 
 app.listen(PORT, () => {
   console.log(`server running on ${PORT}`)
