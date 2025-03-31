@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@repo/ui": "workspace:*",
+    "lucide-react": "^0.476.0",
     "next": "^15.2.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
@@ -25,6 +26,7 @@
     "@types/react-dom": "19",
     "eslint": "^9",
     "tailwindcss": "^4",
+    "tailwindcss-animate": "^1.0.7",
     "typescript": "^5"
   }
 }
