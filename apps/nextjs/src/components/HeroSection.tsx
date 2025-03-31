@@ -5,18 +5,18 @@ export const HeroSection = () => {
   return (
     <section className="min-h-screen pt-24 pb-12 px-4 flex flex-col items-center justify-center relative overflow-hidden">
       {/* background gradient */}
-      <div className="absolute h-[60vh] bg-gradient-to-b from-primary/20 via-accent/10 to-transparent -z-10" />
+      <div className="absolute top-0 left-0 right-0 h-[60vh] bg-gradient-to-b from-primary/20 via-accent/10 to-transparent -z-10" />
       {/* floating icons */}
-      <div className="top-40 left-1/4 animate-float transform -translate-x-1/2">
+      <div className="absolute top-40 left-1/4 animate-float transform -translate-x-1/2 animation-delay-900">
         <Users size={30} className="text-primary/60" />
       </div>
       <div className="absolute top-60 right-1/4 animate-float animation-delay-200">
         <Video size={30} className="text-secondary/30" />
       </div>
-      <div className="absolute bottom-40 left-1/3 animate-float animation-delay-300">
+      <div className="absolute  top-80 left-1/6 animate-float animation-delay-300">
         <Share2 size={30} className="text-accent/60" />
       </div>
-      <div className="absolute bottom-60 right-1/3 animate-float animation-delay-400">
+      <div className="absolute top-100 right-1/3 animate-float animation-delay-400">
         <MessageCircle size={30} className="text-primary-60" />
       </div>
 
