@@ -3,6 +3,7 @@ import { HeroSection } from '@/components/HeroSection';
 import Navbar from '@/components/Navbar';
 import { Clock, Globe, MessageCircle, Share2, Users, Video } from 'lucide-react';
 import FeatureCard from '@/components/FeatureCard';
+import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
@@ -64,6 +65,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 }
