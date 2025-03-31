@@ -1,5 +1,6 @@
 import { Button } from '@repo/ui/components/base/button';
 import Link from 'next/link';
+import { DialogDemo } from './Dialog';
 
 const Navbar = () => {
   return (
@@ -28,6 +29,7 @@ const Navbar = () => {
             Log In{' '}
           </Button>
           <Button> Sign up </Button>
+          <DialogDemo name="click me" description="signup with a unique username" url="http://localhost:8080/api/auth/signup" title='Signup' buttonVariant='default' />
         </div>
       </div>
     </nav>
