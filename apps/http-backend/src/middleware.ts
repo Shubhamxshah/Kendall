@@ -1,17 +1,15 @@
 import { NextFunction, Request, Response } from 'express';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 
-export const middleware = (req: Request, res: Response, next: NextFunction) => {
+export const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
   const token =
-    req.headers?.cookie
-      ?.split('; ')
-      .find((c) => c.startsWith('token='))
-      ?.split('=')[1] || '';
+    req.headers["authorization"]
+      ?.split(' ')[1] || "";
 
-  const jwt_secret = process.env.jwt_secret || 'shubhamsecret';
+  const jwt_secret = process.env.ACCESS_TOKEN_SECRET || 'access_token_secret';
 
   try {
-    const decoded = jwt.verify(token, jwt_secret!) as JwtPayload;
+    const decoded = jwt.verify(token, jwt_secret) as JwtPayload;
     if (decoded && typeof decoded == 'object' && 'userId' in decoded) {
       req.userId = decoded.userId;
       next();

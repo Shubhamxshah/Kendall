@@ -125,6 +125,14 @@ exports.Prisma.UserScalarFieldEnum = {
   photo: 'photo'
 };
 
+exports.Prisma.RefreshTokenScalarFieldEnum = {
+  id: 'id',
+  token: 'token',
+  userId: 'userId',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.RoomScalarFieldEnum = {
   id: 'id',
   slug: 'slug',
@@ -158,6 +166,7 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   User: 'User',
+  RefreshToken: 'RefreshToken',
   Room: 'Room',
   Chat: 'Chat'
 };
