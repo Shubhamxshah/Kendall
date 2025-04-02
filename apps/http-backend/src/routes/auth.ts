@@ -145,7 +145,28 @@ authRouter.post("/refresh-token", async (req, res) => {
   } catch (error) {
     res.status(403).json({ error: "Invalid refresh token" });
   }
-}); 
+});
+
+authRouter.get("/user/profile", authMiddleware, async (req, res) => {
+  const userId = Number(req.userId); 
+
+  if (!userId) {
+    res.status(400).json({message: "unauthorized, userId not present from middleware"})
+    return;
+  }
+
+  const user = await prisma.user.findUnique({
+    where: {
+      id: userId
+    }
+  })
+
+  if (!user) {
+    res.status(300).json({message: "user doesnt exist"})
+  }
+  
+  res.status(200).json({user : user?.username})
+})
 
 authRouter.post("/logout", authMiddleware, async (req, res) => {
   try {

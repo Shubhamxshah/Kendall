@@ -19,8 +19,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import axios from "axios";
 
 const api = axios.create({
-  baseUrl: process.env.BACKEND_URL || "http://localhost:8080"
-})
+  baseURL: process.env.BACKEND_URL || "http://localhost:8080", 
+  headers: {
+    'Content-Type': 'application/json'
+  }
+}); 
 
 interface DialogProps {
   name: string;
