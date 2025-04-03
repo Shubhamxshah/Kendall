@@ -64,12 +64,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
               { withCredentials: true }
             );
 
-            //store new token
             const newToken = refreshResponse.data.accessToken;
+            //update authorization header
+            api.defaults.headers['Authorization'] = `Bearer ${newToken}`;
+            console.log("api header are now", api.defaults.headers)
+            originalRequest.headers.Authorization = `Bearer ${newToken}`;
+            //store new token
             setAccessToken(newToken);
 
-            //update authorization header
-            originalRequest.headers.Authorization = `Bearer ${newToken}`;
 
             // retry original request
             return api(originalRequest);
@@ -107,7 +109,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
         const userResponse = await api.get('/api/auth/user/profile');
         console.log("userresponse is", userResponse)
-        setUsername(userResponse.data.username);
+        setUsername(userResponse.data.user);
       } catch (e) {
         // if error user is not authenticated
         console.log(e);
