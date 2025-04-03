@@ -97,7 +97,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       try {
         // try to get the current user data using the refresh token
         const response = await axios.post(
-          `${process.env.BACKEND_URL || 'http://localhost:8080'}/api/auth/refresh-token`
+          `${process.env.BACKEND_URL || 'http://localhost:8080'}/api/auth/refresh-token`, 
+          {}, 
+          { withCredentials: true }
         );
         setAccessToken(response.data.accessToken);
 

@@ -52,7 +52,7 @@ authRouter.post("/signup", async (req, res) => {
       secure: process.env.NODE_ENV === "production", // ensures the cookie is sent over https
       sameSite: "lax", // makes sure cross site requests are forbidden
       maxAge: 7 * 24 * 60 * 60 * 1000, 
-      path: "http://localhost:8080/api/auth/refresh-token"
+      path: "/api/auth"
     })
 
     res.status(200).json({message: `user created ${user.username}`, accessToken});
@@ -109,8 +109,7 @@ authRouter.post("/signin", async (req, res) => {
       secure: process.env.NODE_ENV === "production", 
       sameSite: "lax", 
       maxAge: 7 * 24 * 60 * 60 * 1000,
-      path: "http://localhost:8080/api/auth/refresh-token"
-
+      path: "/api/auth"
     })
 
     res.status(200).json({

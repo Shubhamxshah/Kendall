@@ -6,6 +6,8 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
     req.headers["authorization"]
       ?.split(' ')[1] || "";
 
+  console.log(token);
+
   const jwt_secret = process.env.ACCESS_TOKEN_SECRET || 'access_token_secret';
 
   try {
