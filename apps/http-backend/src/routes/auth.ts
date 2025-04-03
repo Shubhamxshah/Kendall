@@ -153,7 +153,8 @@ authRouter.post("/refresh-token", async (req, res) => {
 
 authRouter.get("/user/profile", authMiddleware, async (req, res) => {
   const userId = Number(req.userId); 
-
+  
+  console.log("userId from /user/profile route", userId)
   if (!userId) {
     res.status(400).json({message: "unauthorized, userId not present from middleware"})
     return;
@@ -165,6 +166,7 @@ authRouter.get("/user/profile", authMiddleware, async (req, res) => {
     }
   })
 
+  console.log("user from /user/profile", user)
   if (!user) {
     res.status(300).json({message: "user doesnt exist"})
     return;

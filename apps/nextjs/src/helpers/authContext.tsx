@@ -38,7 +38,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const requestInterceptor = api.interceptors.request.use(
       (config) => {
         if (accessToken) {
-          config.headers.Authorization = `Bearer ${accessToken}`;
+          console.log("accesstoken inside request interceptor", accessToken)
+          config.headers["Authorization"] = `Bearer ${accessToken}`;
+          console.log('setting auth header', config.headers.Authorization)
         }
         return config;
       },
@@ -104,6 +106,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         setAccessToken(response.data.accessToken);
 
         const userResponse = await api.get('/api/auth/user/profile');
+        console.log("userresponse is", userResponse)
         setUsername(userResponse.data.username);
       } catch (e) {
         // if error user is not authenticated
