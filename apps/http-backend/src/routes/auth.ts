@@ -50,8 +50,9 @@ authRouter.post("/signup", async (req, res) => {
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true, // prevents client side javascript from reading the cookie 
       secure: process.env.NODE_ENV === "production", // ensures the cookie is sent over https
-      sameSite: "strict", // makes sure cross site requests are forbidden
-      maxAge: 7 * 24 * 60 * 60 * 1000
+      sameSite: "lax", // makes sure cross site requests are forbidden
+      maxAge: 7 * 24 * 60 * 60 * 1000, 
+      path: "http://localhost:8080/api/auth/refresh-token"
     })
 
     res.status(200).json({message: `user created ${user.username}`, accessToken});
@@ -84,6 +85,7 @@ authRouter.post("/signin", async (req, res) => {
   
     if (!isPasswordValid) {
       res.status(401).json({error: "Incorrect password"});
+      return;
     }
 
     const { accessToken, refreshToken } = generateTokens(user.id);
@@ -105,15 +107,16 @@ authRouter.post("/signin", async (req, res) => {
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true, 
       secure: process.env.NODE_ENV === "production", 
-      sameSite: "strict", 
-      maxAge: 7 * 24 * 60 * 60 * 1000
+      sameSite: "lax", 
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+      path: "http://localhost:8080/api/auth/refresh-token"
+
     })
 
     res.status(200).json({
       message: `User login successful for ${user.username}`, 
       accessToken
     })
-
   } catch (error) {
     res.status(500).json({error: `${error}`})
   }
@@ -124,6 +127,7 @@ authRouter.post("/refresh-token", async (req, res) => {
 
   if (!refreshToken) {
     res.status(401).json({ error: "Refresh token required" });
+    return;
   }
 
   try {
@@ -138,6 +142,7 @@ authRouter.post("/refresh-token", async (req, res) => {
 
   if (!storedToken) {
       res.status(403).json({ error: "Invaid refresh token"}); 
+      return;
     }
 
   const accessToken = jwt.sign({userId: decoded.userId }, ACCESS_TOKEN_SECRET, { expiresIn: ACCESS_TOKEN_EXPIRY });
@@ -163,6 +168,7 @@ authRouter.get("/user/profile", authMiddleware, async (req, res) => {
 
   if (!user) {
     res.status(300).json({message: "user doesnt exist"})
+    return;
   }
   
   res.status(200).json({user : user?.username})

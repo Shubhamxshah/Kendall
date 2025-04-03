@@ -1,4 +1,3 @@
-import { Button } from '@repo/ui/components/base/button';
 import Link from 'next/link';
 import { DialogDemo } from './Dialog';
 
@@ -24,12 +23,8 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="flex items-center gap-4">
-          <Button variant="outline" className="hidden sm:flex">
-            {' '}
-            Log In{' '}
-          </Button>
-          <Button> Sign up </Button>
-          <DialogDemo name="click me" description="signup with a unique username" url="http://localhost:8080/api/auth/signup" title='Signup' buttonVariant='default' />
+          <DialogDemo name="Login" description="signin with a unique username" url="/api/auth/signin" title='Signin' buttonVariant='outline' />
+          <DialogDemo name="Sign up" description="signup with a unique username" url="/api/auth/signup" title='Signup' buttonVariant='default' />
         </div>
       </div>
     </nav>

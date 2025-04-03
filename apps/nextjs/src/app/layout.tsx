@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { AuthProvider } from '@/helpers/authContext';
 
 export const metadata: Metadata = {
   title: 'turborepo-shadcn-tailwind-v4',
@@ -13,7 +14,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+      <AuthProvider>
+        {children}
+      </AuthProvider>
+      </body>
     </html>
   );
 }

@@ -12,11 +12,11 @@ import {
 } from '@repo/ui/components/base/dialog';
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@repo/ui/components/base/form';
 import { Input } from '@repo/ui/components/base/input';
-import { Label } from '@repo/ui/components/base/label';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import axios from "axios";
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/helpers/authContext';
 
 
 interface DialogProps {
@@ -43,6 +43,9 @@ const formSchema = z.object({
 });
 
 export function DialogDemo({ name, description, url, title, buttonVariant }: DialogProps) {
+  const router = useRouter();
+  const  { api, setAccessToken } = useAuth();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -51,9 +54,14 @@ export function DialogDemo({ name, description, url, title, buttonVariant }: Dia
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    axios.post(url, values).then((res) => console.log(res)).catch((e) => console.log(e))
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    
+    try {
+      api.post(url, values).then((res) => setAccessToken(res.data.accessToken)).catch((e) => console.log(e)); 
+      router.push("/dashboard");
+    } catch (error) {
+      console.log(error); 
+    }
   }
 
   return (
@@ -66,20 +74,6 @@ export function DialogDemo({ name, description, url, title, buttonVariant }: Dia
           <DialogTitle>{title}</DialogTitle>
           <DialogDescription>{description}</DialogDescription>
         </DialogHeader>
-        {/* <div className="grid gap-4 py-4"> */}
-        {/*   <div className="grid grid-cols-4 items-center gap-4"> */}
-        {/*     <Label htmlFor="name" className="text-right"> */}
-        {/*       Name */}
-        {/*     </Label> */}
-        {/*     <Input id="name" value="Pedro Duarte" className="col-span-3" /> */}
-        {/*   </div> */}
-        {/*   <div className="grid grid-cols-4 items-center gap-4"> */}
-        {/*     <Label htmlFor="username" className="text-right"> */}
-        {/*       Username */}
-        {/*     </Label> */}
-        {/*     <Input id="username" value="@peduarte" className="col-span-3" /> */}
-        {/*   </div> */}
-        {/* </div> */}
 
         <div className="grid gap-4 py-4">
           <Form {...form}>
