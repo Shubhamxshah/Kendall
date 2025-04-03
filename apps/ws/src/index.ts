@@ -1,11 +1,10 @@
 import { WebSocket, WebSocketServer } from "ws";
 import jwt from "jsonwebtoken"
 import  { prisma } from "@repo/database"
-import url from "url";
 
 const wss = new WebSocketServer({port: 8081});
 
-const jwt_secret = process.env.jwt_secret || "shubhamsecret";
+const jwt_secret = process.env.jwt_secret || "access_token_secret";
 
 interface User {
   userId: number, 

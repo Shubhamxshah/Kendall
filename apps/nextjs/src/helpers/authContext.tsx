@@ -63,7 +63,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
               {},
               { withCredentials: true }
             );
-
             const newToken = refreshResponse.data.accessToken;
             //update authorization header
             api.defaults.headers['Authorization'] = `Bearer ${newToken}`;
@@ -79,6 +78,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             // if refresh fails, clear state and redirect to homepage
             setUsername(null);
             setAccessToken(null);
+            
+            console.log("error in response interceptor, redirecting")
             router.push('/');
             return Promise.reject(refreshError);
           }
@@ -115,13 +116,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         console.log(e);
         setUsername(null);
         setAccessToken(null);
+        console.log("error from init auth, redirecting")
+        router.push("/")
       } finally {
         setLoading(false);
       }
     };
 
     initAuth();
-  }, []);
+  }, [router]);
 
   return (
     <AuthContext.Provider

@@ -147,7 +147,7 @@ authRouter.post("/refresh-token", async (req, res) => {
   const accessToken = jwt.sign({userId: decoded.userId }, ACCESS_TOKEN_SECRET, { expiresIn: ACCESS_TOKEN_EXPIRY });
   res.status(200).json({ accessToken });
   } catch (error) {
-    res.status(403).json({ error: "Invalid refresh token" });
+    res.status(402).json({ error: "Invalid refresh token" });
   }
 });
 
