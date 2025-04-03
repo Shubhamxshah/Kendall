@@ -1,11 +1,12 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
-import axios from 'axios';
+import axios, { AxiosInstance } from 'axios';
 import { useRouter } from 'next/navigation';
 
 type AuthContextType = {
   username: string | null;
   loading: boolean;
   isAuthenticated: boolean;
+  api: AxiosInstance; 
 };
 
 
@@ -113,7 +114,8 @@ export const AuthProvider = ({children}: {children: ReactNode}) => {
       value={{
         username, 
         loading, 
-        isAuthenticated: !!username
+        isAuthenticated: !!username, 
+        api
       }}
     >
     {children}
